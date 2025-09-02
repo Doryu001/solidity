@@ -319,6 +319,10 @@ will consume more gas than the 2300 gas stipend:
     not recommended, since the fallback is invoked and would not fail for interface confusions
     on the part of the sender).
 
+.. warning::
+    Note that ``send`` and ``transfer`` are deprecated and scheduled for removal in the next breaking version (0.9).
+    You are encouraged to use the :ref:`call function <address_related>` with an optionally provided maximum
+    amount of gas (default forwards all remaining gas) and an empty calldata parameter, e.g., ``call{value: amount}("")``.
 
 .. warning::
     A contract without a receive Ether function can receive Ether as a
@@ -440,6 +444,7 @@ operations as long as there is enough gas passed on to it.
 
             // If someone sends Ether to that contract,
             // the transfer will fail, i.e. this returns false here.
+            // This will report a warning (deprecation)
             return testPayable.send(2 ether);
         }
 
